@@ -1,10 +1,10 @@
 ## 1. O que é Algortimo? 
 ##É uma seqência lógica, finita que serve para resolver problemas ou realizar alguma tarefa específica.
-## 2. A estrutura básica 
+## 2. A estrutura básica:
 ##Entrada: Onde se recebe os dados(ex: nome dos alunos e notas)
 ##Processamento: Manipulação dos dados, o que o programa irá fazer com os dados (ex: organizar os nomes e as notas dos alunos )
 ##Saída: Mostra o resultado do que foi feito. (ex: mostrar o valor das notas dos alunos e seus nomes.)
-## 3. Exemplo do dia a dia: Arrumar-se para ir ao trablho 
+## 3. Exemplo do dia a dia: Arrumar-se para ir ao trablho
    1- Levantar da cama
    2- Preparar o café
    3- Tomar banho
