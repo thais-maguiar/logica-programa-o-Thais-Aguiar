@@ -1,1 +1,653 @@
+import java.util.Scanner;
 
+public class QuizSegurancaDigital {
+
+    public static final String RESET = "\u001B[0m";
+    public static final String VERDE = "\u001B[32m";
+    public static final String VERMELHO = "\u001B[31m";
+    public static final String AMARELO = "\u001B[33m";
+    public static final String AZUL = "\u001B[34m";
+    public static final String CIANO = "\u001B[36m";
+    public static final String ROXO = "\u001B[35m";
+    public static final String CINZA = "\u001B[90m";
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        aberturaHistoria();
+        esperarEnter(scanner);
+
+        // ─── MENU PRINCIPAL ────────────────────────────────────────────────
+        int opcao = -1;
+
+        while (opcao != 0) {
+            limparTelaFake();
+            System.out.println(CIANO + "╔══════════════════════════════════════════════════════════════╗" + RESET);
+            System.out.println(CIANO + "║               MENU PRINCIPAL — CRIPTOLÂNDIA                 ║" + RESET);
+            System.out.println(CIANO + "╚══════════════════════════════════════════════════════════════╝" + RESET);
+            System.out.println();
+            System.out.println("  " + AMARELO + "1" + RESET + " - Jogar Quiz (Teste do Guardião)");
+            System.out.println("  " + AZUL    + "2" + RESET + " - Dicas de Segurança Digital");
+            System.out.println("  " + VERMELHO + "0" + RESET + " - Sair do reino");
+            System.out.println();
+            System.out.print("Escolha uma opção: ");
+
+            // Lê a entrada e valida
+            String entradaMenu = scanner.nextLine().trim();
+
+            // Converte para inteiro com tratamento básico
+            if (entradaMenu.equals("1") || entradaMenu.equals("2") || entradaMenu.equals("0")) {
+                opcao = Integer.parseInt(entradaMenu);
+            } else {
+                System.out.println(VERMELHO + "Opção inválida! Digite 0, 1 ou 2." + RESET);
+                esperarEnter(scanner);
+                continue;
+            }
+
+            switch (opcao) {
+                case 1:
+                    // ── inicia o quiz e volta ao menu ao terminar ──
+                    iniciarQuiz(scanner);
+                    System.out.println();
+                    System.out.println(CIANO + "Voltando ao menu principal..." + RESET);
+                    esperarEnter(scanner);
+                    break;
+
+                case 2:
+                    // ── exibe dicas e volta ao menu ──
+                    limparTelaFake();
+                    mostrarDicasSeguranca();
+                    esperarEnter(scanner);
+                    break;
+
+                case 0:
+                    limparTelaFake();
+                    System.out.println(ROXO + "╔══════════════════════════════════════════════════════════════╗" + RESET);
+                    System.out.println(ROXO + "║          Obrigado por proteger Criptolândia!                 ║" + RESET);
+                    System.out.println(ROXO + "║              Até a próxima, Guardião!                        ║" + RESET);
+                    System.out.println(ROXO + "╚══════════════════════════════════════════════════════════════╝" + RESET);
+                    System.out.println();
+                    break;
+            }
+        }
+        // ───────────────────────────────────────────────────────────────────
+
+        scanner.close();
+    }
+
+    // =========================================================================
+    //  QUIZ COMPLETO (extraído do main original)
+    // =========================================================================
+    public static void iniciarQuiz(Scanner scanner) {
+        int pontuacao = 0;
+        int erros = 0;
+        int numeroPergunta = 1;
+        String resposta;
+
+        while (numeroPergunta <= 5) {
+            limparTelaFake();
+
+            mostrarCenarioCriptolandia(numeroPergunta, erros);
+
+            System.out.println(AMARELO + "╔════════════════════════════════════════════════════╗" + RESET);
+            System.out.println(AMARELO + "║          TESTE DO GUARDIÃO - ETAPA " + numeroPergunta + "              ║" + RESET);
+            System.out.println(AMARELO + "╚════════════════════════════════════════════════════╝" + RESET);
+            System.out.println();
+
+            switch (numeroPergunta) {
+                case 1:
+                    System.out.println("Em Criptolândia, os cidadãos guardam seus segredos em baús mágicos.");
+                    System.out.println("O que esses baús representam?");
+                    System.out.println("A) Jogos instalados");
+                    System.out.println("B) Dados pessoais");
+                    System.out.println("C) Músicas favoritas");
+                    System.out.println("D) Desenhos antigos");
+                    System.out.println("E) Aplicativos de pintura");
+                    break;
+
+                case 2:
+                    System.out.println("Você recebe uma mensagem estranha dizendo que ganhou um prêmio,");
+                    System.out.println("mas para receber precisa clicar em um link e digitar sua senha.");
+                    System.out.println("O que isso pode ser?");
+                    System.out.println("A) Uma mensagem confiável");
+                    System.out.println("B) Um backup dos seus arquivos");
+                    System.out.println("C) Um golpe para roubar seus dados");
+                    System.out.println("D) Uma senha segura");
+                    System.out.println("E) Uma proteção do computador");
+                    break;
+
+                case 3:
+                    System.out.println("Lord Vírus, vindo de Hackerion, tenta entrar usando links desconhecidos.");
+                    System.out.println("O que o jovem aprendiz deve fazer?");
+                    System.out.println("A) Clicar rapidamente");
+                    System.out.println("B) Compartilhar com todos os amigos");
+                    System.out.println("C) Ignorar os riscos");
+                    System.out.println("D) Evitar clicar e verificar se é confiável");
+                    System.out.println("E) Colocar sua senha no link");
+                    break;
+
+                case 4:
+                    System.out.println("Os firewalls mágicos cercam Criptolândia.");
+                    System.out.println("Qual é a função deles?");
+                    System.out.println("A) Deixar o castelo mais bonito");
+                    System.out.println("B) Guardar cavalos");
+                    System.out.println("C) Controlar e bloquear acessos perigosos");
+                    System.out.println("D) Criar músicas");
+                    System.out.println("E) Apagar fotos antigas");
+                    break;
+
+                case 5:
+                    System.out.println("Para proteger os baús de Dados Pessoais, qual senha seria mais segura?");
+                    System.out.println("A) 123456");
+                    System.out.println("B) senha123");
+                    System.out.println("C) meu_nome");
+                    System.out.println("D) data de nascimento");
+                    System.out.println("E) Uma senha longa com letras, números e símbolos");
+                    break;
+            }
+
+            System.out.println();
+            System.out.print("Digite a alternativa correta (A, B, C, D ou E): ");
+            resposta = scanner.nextLine().trim().toUpperCase();
+
+            while (!resposta.equals("A") && !resposta.equals("B") && !resposta.equals("C")
+                    && !resposta.equals("D") && !resposta.equals("E")) {
+                System.out.print("Opção inválida. Digite A, B, C, D ou E: ");
+                resposta = scanner.nextLine().trim().toUpperCase();
+            }
+
+            if (respostaCorreta(numeroPergunta, resposta)) {
+                pontuacao++;
+                limparTelaFake();
+                telaAcerto(numeroPergunta);
+            } else {
+                erros++;
+                limparTelaFake();
+                telaErro(numeroPergunta, respostaCertaTexto(numeroPergunta));
+            }
+
+            System.out.println();
+            System.out.println("Pontuação atual: " + pontuacao + " de 5");
+            System.out.println("Ameaça de Hackerion: " + erros + " de 5");
+            esperarEnter(scanner);
+
+            numeroPergunta++;
+        }
+
+        limparTelaFake();
+        resultadoFinal(pontuacao, erros);
+    }
+
+    // =========================================================================
+    //  DICAS DE SEGURANÇA DIGITAL
+    // =========================================================================
+    public static void mostrarDicasSeguranca() {
+        System.out.println(AZUL + "╔══════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(AZUL + "║              DICAS DE SEGURANÇA DIGITAL                     ║" + RESET);
+        System.out.println(AZUL + "╚══════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.println();
+
+        System.out.println(AMARELO + "🔑  1. SENHAS SEGURAS" + RESET);
+        System.out.println("   - Use senhas longas com letras maiúsculas, minúsculas, números e símbolos.");
+        System.out.println("   - Nunca use datas de nascimento, nomes ou sequências como '123456'.");
+        System.out.println("   - Use senhas diferentes para cada conta.");
+        System.out.println();
+
+        System.out.println(VERMELHO + "🎣  2. PHISHING E GOLPES ONLINE" + RESET);
+        System.out.println("   - Desconfie de mensagens que pedem sua senha ou dados pessoais.");
+        System.out.println("   - Nunca clique em links de remetentes desconhecidos.");
+        System.out.println("   - Verifique sempre o endereço do site antes de digitar qualquer dado.");
+        System.out.println();
+
+        System.out.println(VERDE + "🔥  3. FIREWALL E ANTIVÍRUS" + RESET);
+        System.out.println("   - Mantenha o antivírus sempre atualizado.");
+        System.out.println("   - Ative o firewall do seu sistema operacional.");
+        System.out.println("   - Faça varreduras periódicas no seu dispositivo.");
+        System.out.println();
+
+        System.out.println(CIANO + "📱  4. REDES SOCIAIS E PRIVACIDADE" + RESET);
+        System.out.println("   - Revise as configurações de privacidade das suas contas.");
+        System.out.println("   - Não compartilhe informações pessoais com desconhecidos.");
+        System.out.println("   - Cuidado com o que você publica: dados públicos podem ser usados contra você.");
+        System.out.println();
+
+        System.out.println(ROXO + "💾  5. BACKUP DOS SEUS DADOS" + RESET);
+        System.out.println("   - Faça cópias de segurança regularmente.");
+        System.out.println("   - Use serviços de nuvem confiáveis ou HDs externos.");
+        System.out.println("   - Backups protegem você de ransomware e falhas de hardware.");
+        System.out.println();
+    }
+
+    // =========================================================================
+    //  MÉTODOS ORIGINAIS (sem alteração)
+    // =========================================================================
+
+    public static boolean respostaCorreta(int pergunta, String resposta) {
+        return (pergunta == 1 && resposta.equals("B")) ||
+               (pergunta == 2 && resposta.equals("C")) ||
+               (pergunta == 3 && resposta.equals("D")) ||
+               (pergunta == 4 && resposta.equals("C")) ||
+               (pergunta == 5 && resposta.equals("E"));
+    }
+
+    public static String respostaCertaTexto(int pergunta) {
+        switch (pergunta) {
+            case 1: return "B";
+            case 2: return "C";
+            case 3: return "D";
+            case 4: return "C";
+            case 5: return "E";
+            default: return "";
+        }
+    }
+
+    public static void aberturaHistoria() {
+        System.out.println(CIANO + "╔══════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(CIANO + "║                 O REINO DOS DADOS SEGUROS                  ║" + RESET);
+        System.out.println(CIANO + "║                     REINO DE CRIPTOLÂNDIA                  ║" + RESET);
+        System.out.println(CIANO + "╚══════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.println();
+
+        System.out.println("No coração da internet existia um reino mágico e protegido chamado Criptolândia.");
+        System.out.println("Lá, nomes, fotos, segredos e senhas eram guardados em baús mágicos chamados Dados Pessoais.");
+        System.out.println("As muralhas eram cercadas por firewalls mágicos e guardadas por soldados verdes.");
+        System.out.println();
+
+        mostrarCasteloCriptolandia();
+        mostrarBausDeDados();
+        mostrarGuardasPortao();
+        mostrarCavaleirosDePatrulha();
+
+        System.out.println(VERMELHO + "\nDo outro lado da rede ficava Hackerion..." + RESET);
+        System.out.println(VERMELHO + "um reino escuro, cheio de armadilhas, links suspeitos e vírus." + RESET);
+        System.out.println();
+
+        mostrarReinoHackerion();
+
+        System.out.println(AMARELO + "\nO Rei dos Dados chamou o jovem aprendiz e disse:" + RESET);
+        System.out.println("\"Se você responder corretamente, os portões continuarão fechados.");
+        System.out.println("Se errar... Hackerion ficará mais perto!\"");
+    }
+
+    public static void mostrarCenarioCriptolandia(int fase, int erros) {
+        System.out.println(CIANO + "╔════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(CIANO + "║              CENÁRIO DE CRIPTOLÂNDIA             ║" + RESET);
+        System.out.println(CIANO + "╚════════════════════════════════════════════════════╝" + RESET);
+        System.out.println();
+
+        mostrarCasteloCriptolandia();
+        mostrarStatusPortao(erros);
+
+        switch (fase) {
+            case 1:
+                System.out.println(VERDE + "Cena 1: Guardas vigiam os portões principais." + RESET);
+                mostrarGuardasPortao();
+                break;
+            case 2:
+                System.out.println(AMARELO + "Cena 2: Arqueiros observam mensagens suspeitas nas muralhas." + RESET);
+                mostrarArqueirosDaMuralha();
+                break;
+            case 3:
+                System.out.println(AMARELO + "Cena 3: Cavaleiros patrulham os caminhos contra links desconhecidos." + RESET);
+                mostrarCavaleirosDePatrulha();
+                break;
+            case 4:
+                System.out.println(AZUL + "Cena 4: Guardiões protegem os baús de Dados Pessoais." + RESET);
+                mostrarGuardioesDosBaus();
+                break;
+            case 5:
+                System.out.println(VERMELHO + "Cena 5: A tropa final se prepara para enfrentar Lord Vírus." + RESET);
+                mostrarTropaFinal();
+                break;
+        }
+
+        if (erros >= 3) {
+            mostrarInimigosHackerion();
+        }
+    }
+
+    public static void mostrarCasteloCriptolandia() {
+        System.out.println(AZUL);
+        System.out.println("                         |>>>                 |>>>");
+        System.out.println("                         |                    |");
+        System.out.println("                    _  _|_  _            _  _|_  _");
+        System.out.println("                   |;|_|;|_|;|          |;|_|;|_|;|");
+        System.out.println("                   \\\\.    .  /          \\\\.    .  /");
+        System.out.println("                    \\\\:  .  /            \\\\:  .  /");
+        System.out.println("                     ||:   |              ||:   |");
+        System.out.println("                     ||:.  |              ||:.  |");
+        System.out.println("                  __ ||: . | __        __ ||: . | __");
+        System.out.println("             ____--`~    '--~~__  ____--`~    '--~~__");
+        System.out.println("            |              REINO DE CRIPTOLÂNDIA       |");
+        System.out.println("            |    []   []   []   []   []   []   []      |");
+        System.out.println("            |                                           |");
+        System.out.println("            |        FIREWALLS MÁGICOS ATIVADOS         |");
+        System.out.println("            |        ________             ________       |");
+        System.out.println("            |       |        |           |        |      |");
+        System.out.println("            |       | PORTÃO |           | DADOS  |      |");
+        System.out.println("            |_______|________|___________|________|______|");
+        System.out.println("                  /________________________________\\");
+        System.out.println(RESET);
+    }
+
+    public static void mostrarBausDeDados() {
+        System.out.println(ROXO);
+        System.out.println("                   BAÚS MÁGICOS DE DADOS PESSOAIS");
+        System.out.println();
+        System.out.println("                 __________     __________     __________");
+        System.out.println("                /_________/|   /_________/|   /_________/|");
+        System.out.println("               |  DADOS   ||  |  FOTOS   ||  |  SENHAS  ||");
+        System.out.println("               |  ____    ||  |  ____    ||  |  ____    ||");
+        System.out.println("               | |____|   ||  | |____|   ||  | |____|   ||");
+        System.out.println("               |__________|/  |__________|/  |__________|/");
+        System.out.println(RESET);
+    }
+
+    public static void mostrarGuardasPortao() {
+        soldadoGuardiaoPadrao();
+    }
+
+    public static void mostrarArqueirosDaMuralha() {
+        soldadoGuardiaoPadrao();
+    }
+
+    public static void mostrarGuardioesDosBaus() {
+        soldadoGuardiaoPadrao();
+    }
+
+    public static void mostrarTropaFinal() {
+        soldadoGuardiaoPadrao();
+    }
+
+    public static void mostrarCavaleirosDePatrulha() {
+        System.out.println(AMARELO);
+        System.out.println("               CAVALEIROS DE PATRULHA");
+        System.out.println();
+        System.out.println("          ,--,                   ,--,");
+        System.out.println("     _ ___/ /\\|             _ ___/ /\\|");
+        System.out.println(" ,;'( )__, )  ~         ,;'( )__, )  ~");
+        System.out.println("//  //   '--;          //  //   '--;");
+        System.out.println("'   \\\\     | ^         '   \\\\     | ^");
+        System.out.println("     ^    ^                 ^    ^");
+        System.out.println("      O                       O");
+        System.out.println("     /|\\                     /|\\");
+        System.out.println("     / \\                     / \\");
+        System.out.println();
+        System.out.println("      Os cavaleiros patrulham as estradas do reino.");
+        System.out.println(RESET);
+    }
+
+    public static void telaAcerto(int fase) {
+        System.out.println(VERDE);
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║                    RESPOSTA CERTA!                  ║");
+        System.out.println("║              CRIPTOLÂNDIA SEGUE SEGURA              ║");
+        System.out.println("╚══════════════════════════════════════════════════════╝");
+        System.out.println(RESET);
+        System.out.println();
+
+        soldadoFelizBonito();
+
+        System.out.println(VERDE + "Você protegeu o reino nesta rodada!" + RESET);
+        System.out.println();
+
+        switch (fase) {
+            case 1:
+                System.out.println("Os guardas comemoram a defesa do portão.");
+                mostrarGuardasPortao();
+                break;
+            case 2:
+                System.out.println("Os arqueiros neutralizaram a ameaça.");
+                mostrarArqueirosDaMuralha();
+                break;
+            case 3:
+                System.out.println("Os cavaleiros patrulham o reino em vitória.");
+                mostrarCavaleirosDePatrulha();
+                break;
+            case 4:
+                System.out.println("Os baús de dados continuam protegidos.");
+                mostrarGuardioesDosBaus();
+                break;
+            case 5:
+                System.out.println("A defesa final triunfou sobre Hackerion.");
+                mostrarTropaFinal();
+                mostrarLordVirusDerrotado();
+                break;
+        }
+    }
+
+    public static void telaErro(int fase, String respostaCorreta) {
+        System.out.println(VERMELHO);
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║                   RESPOSTA ERRADA!                  ║");
+        System.out.println("║              HACKERION AVANÇOU NO MAPA              ║");
+        System.out.println("╚══════════════════════════════════════════════════════╝");
+        System.out.println(RESET);
+        System.out.println();
+
+        lordVirusMalvado();
+
+        System.out.println(VERMELHO + "Lord Vírus ficou mais forte nesta rodada!" + RESET);
+        System.out.println("Resposta correta: " + AMARELO + respostaCorreta + RESET);
+        System.out.println();
+
+        switch (fase) {
+            case 1:
+                System.out.println("Os portões foram pressionados pelo ataque.");
+                mostrarGuardasPortao();
+                break;
+            case 2:
+                System.out.println("Uma mensagem falsa quase passou pelas muralhas.");
+                mostrarArqueirosDaMuralha();
+                break;
+            case 3:
+                System.out.println("Os cavaleiros recuam para reorganizar a defesa.");
+                mostrarCavaleirosDePatrulha();
+                break;
+            case 4:
+                System.out.println("Os guardiões reforçam os baús imediatamente.");
+                mostrarGuardioesDosBaus();
+                break;
+            case 5:
+                System.out.println("Lord Vírus chegou à batalha final!");
+                mostrarTropaFinal();
+                mostrarLordVirusTriunfante();
+                break;
+        }
+    }
+
+    public static void soldadoFelizBonito() {
+        soldadoGuardiaoPadrao();
+    }
+
+    public static void soldadoGuardiaoPadrao() {
+        System.out.println(VERDE);
+        System.out.println("              SOLDADO GUARDIÃO");
+        System.out.println();
+        System.out.println("                    /\\");
+        System.out.println("                   /__\\");
+        System.out.println("                  |____|");
+        System.out.println("                  (o  o)");
+        System.out.println("                   \\__/   o/");
+        System.out.println("                ___/||\\__/");
+        System.out.println("               /    ||    \\");
+        System.out.println("              /____/||\\____\\");
+        System.out.println("                 [  ||  ]");
+        System.out.println("                 [  ||  ]");
+        System.out.println("                  /    \\");
+        System.out.println("                 /______\\");
+        System.out.println();
+        System.out.println("          CRIPTOLÂNDIA CONTINUA PROTEGIDA!");
+        System.out.println(RESET);
+    }
+
+    public static void lordVirusMalvado() {
+        System.out.println(VERMELHO);
+        System.out.println("                    CHEFÃO FINAL: LORD VÍRUS");
+        System.out.println();
+        System.out.println("                          /\\              /\\");
+        System.out.println("                         /  \\____________/  \\");
+        System.out.println("                        /                    \\");
+        System.out.println("                       |    ███        ███    |");
+        System.out.println("                       |    █X█        █X█    |");
+        System.out.println("                       |          /\\          |");
+        System.out.println("                       |      ___/  \\___      |");
+        System.out.println("                       |     /  MALWARE \\     |");
+        System.out.println("                        \\    \\___VÍRUS__/    /");
+        System.out.println("                         \\__________________/");
+        System.out.println();
+        System.out.println("                    _______/|  |  |  |\\_______");
+        System.out.println("                   /        |  |  |  |        \\");
+        System.out.println("                  /   XXX   |__|__|__|   XXX   \\");
+        System.out.println("                 /________________________________\\");
+        System.out.println("                    /   /      ||      \\   \\");
+        System.out.println("                   /___/       ||       \\___\\");
+        System.out.println("                  /___/        ||        \\___\\");
+        System.out.println();
+        System.out.println("          Cuidado, Hackerion está mais perto!!");
+        System.out.println(RESET);
+    }
+
+    public static void mostrarInimigosHackerion() {
+        lordVirusMalvado();
+    }
+
+    public static void mostrarReinoHackerion() {
+        System.out.println(CINZA);
+        System.out.println("                    REINO DE HACKERION");
+        System.out.println("          Um lugar sombrio dominado por Lord Vírus...");
+        System.out.println(RESET);
+        System.out.println();
+        lordVirusMalvado();
+    }
+
+    public static void mostrarLordVirusTriunfante() {
+        lordVirusMalvado();
+    }
+
+    public static void mostrarLordVirusDerrotado() {
+        System.out.println(VERDE);
+        System.out.println("                    LORD VÍRUS DERROTADO!");
+        System.out.println();
+        System.out.println("                          /\\              /\\");
+        System.out.println("                         /  \\____________/  \\");
+        System.out.println("                        /                    \\");
+        System.out.println("                       |    XXX        XXX    |");
+        System.out.println("                       |    X_X        X_X    |");
+        System.out.println("                       |          --          |");
+        System.out.println("                       |      ___/  \\___      |");
+        System.out.println("                       |     / DERROTA \\      |");
+        System.out.println("                        \\    \\__VÍRUS__/     /");
+        System.out.println("                         \\__________________/");
+        System.out.println();
+        System.out.println("                    _______/|  |  |  |\\_______");
+        System.out.println("                   /        |  |  |  |        \\");
+        System.out.println("                  /   ---   |__|__|__|   ---   \\");
+        System.out.println("                 /________________________________\\");
+        System.out.println("                    /   /      ||      \\   \\");
+        System.out.println("                   /___/       ||       \\___\\");
+        System.out.println("                  /___/        ||        \\___\\");
+        System.out.println();
+        System.out.println("        Lord Vírus caiu! Criptolândia venceu!");
+        System.out.println(RESET);
+    }
+
+    public static void mostrarStatusPortao(int erros) {
+        System.out.println("STATUS DOS PORTÕES DE CRIPTOLÂNDIA:");
+
+        if (erros == 0) {
+            System.out.println(VERDE + "        [██████████] 100% - Portões totalmente protegidos" + RESET);
+        } else if (erros == 1) {
+            System.out.println(VERDE + "        [████████--] 80%  - Pequeno ataque bloqueado" + RESET);
+        } else if (erros == 2) {
+            System.out.println(AMARELO + "        [██████----] 60%  - Defesa abalada" + RESET);
+        } else if (erros == 3) {
+            System.out.println(AMARELO + "        [████------] 40%  - Hackerion se aproximando" + RESET);
+        } else if (erros == 4) {
+            System.out.println(VERMELHO + "        [██--------] 20%  - Portões quase rompidos" + RESET);
+        } else {
+            System.out.println(VERMELHO + "        [----------] 0%   - Criptolândia foi invadida" + RESET);
+        }
+
+        System.out.println();
+    }
+
+    public static void resultadoFinal(int pontuacao, int erros) {
+        System.out.println(ROXO + "╔════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(ROXO + "║                    FIM DA MISSÃO                  ║" + RESET);
+        System.out.println(ROXO + "╚════════════════════════════════════════════════════╝" + RESET);
+        System.out.println();
+
+        System.out.println("Pontuação final: " + pontuacao + " de 5");
+        System.out.println("Nível de ameaça de Hackerion: " + erros + " de 5");
+        System.out.println();
+
+        if (pontuacao >= 4) {
+            mostrarCasteloSalvo();
+            mostrarTropaFinal();
+            mostrarLordVirusDerrotado();
+            System.out.println(VERDE + "MISSÃO CUMPRIDA!" + RESET);
+            System.out.println("Criptolândia foi salva e os Dados Pessoais continuam protegidos.");
+        } else if (pontuacao >= 2) {
+            mostrarCasteloDanificado();
+            mostrarTropaFinal();
+            mostrarLordVirusTriunfante();
+            System.out.println(AMARELO + "CRIPTOLÂNDIA SOBREVIVEU, MAS COM DANOS!" + RESET);
+            System.out.println("O reino resistiu parcialmente, mas Lord Vírus deixou cicatrizes na defesa.");
+        } else {
+            mostrarCasteloInvadido();
+            mostrarLordVirusTriunfante();
+            System.out.println(VERMELHO + "CRIPTOLÂNDIA FOI INVADIDA!" + RESET);
+            System.out.println("Lord Vírus conseguiu atravessar as defesas do reino.");
+        }
+    }
+
+    public static void mostrarCasteloSalvo() {
+        System.out.println(VERDE);
+        System.out.println("                         |>>>       |>>>       |>>>");
+        System.out.println("                         |          |          |");
+        System.out.println("                    _  _|_  _  _  _|_  _  _  _|_  _");
+        System.out.println("                   |;|_|;|_|;||;|_|;|_|;||;|_|;|_|;|");
+        System.out.println("                   \\       CRIPTOLÂNDIA SALVA       /");
+        System.out.println("                    \\        DADOS SEGUROS         /");
+        System.out.println("                     |    █    █    █    █         |");
+        System.out.println("                     |______________________________|");
+        System.out.println(RESET);
+    }
+
+    public static void mostrarCasteloDanificado() {
+        System.out.println(AMARELO);
+        System.out.println("                         |>>>       |>>>");
+        System.out.println("                         |          |");
+        System.out.println("                    _  _|_  _  _  _|_  _");
+        System.out.println("                   |;|_|;|_|;||;|_|;|_|;|");
+        System.out.println("                   \\        CRIPTOLÂNDIA       /");
+        System.out.println("                    \\         ABALADA          /");
+        System.out.println("                     |      █    █    X        |");
+        System.out.println("                     |_________________________|");
+        System.out.println(RESET);
+    }
+
+    public static void mostrarCasteloInvadido() {
+        System.out.println(VERMELHO);
+        System.out.println("                         XX         XX");
+        System.out.println("                    _  _     _  _     _");
+        System.out.println("                   |;|_|;| XX |;|_|;|");
+        System.out.println("                   \\       CRIPTOLÂNDIA       /");
+        System.out.println("                    \\         INVADIDA        /");
+        System.out.println("                     |   LORD VÍRUS ENTROU   |");
+        System.out.println("                     |____DADOS_EM_RISCO_____|");
+        System.out.println(RESET);
+    }
+
+    public static void esperarEnter(Scanner scanner) {
+        System.out.print("\nPressione ENTER para continuar...");
+        scanner.nextLine();
+    }
+
+    public static void limparTelaFake() {
+        for (int i = 0; i < 8; i++) {
+            System.out.println();
+        }
+    }
+}
