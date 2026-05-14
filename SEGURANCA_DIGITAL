@@ -250,7 +250,7 @@ public class QuizzSegurancaDigital {
 
         System.out.println("No coração da internet existia um reino mágico e protegido chamado Criptolândia.");
         System.out.println("Lá, nomes, fotos, segredos e senhas eram guardados em baús mágicos chamados Dados Pessoais.");
-        System.out.println("As muralhas eram cercadas por firewalls mágicos e guardadas por soldados verdes.");
+        System.out.println("As muralhas eram cercadas por firewalls mágicos e guardadas por soldados.");
         System.out.println();
 
         mostrarCasteloCriptolandia();
