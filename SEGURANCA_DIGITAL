@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class QuizSegurancaDigital {
+public class QuizzSegurancaDigital {
 
     public static final String RESET = "\u001B[0m";
     public static final String VERDE = "\u001B[32m";
